@@ -1,0 +1,21 @@
+<%= @cocktail.name %>
+<% @cocktail.doses.each do |dose| %>
+<div class="dose"><%= dose.description %>
+<%= dose.ingredient.name %></div>
+<%= link_to "Remove", dose_path(dose), method: :delete %>
+<% end %>
+<br>
+
+<h3>New Dose</h3>
+
+<%= simple_form_for [@cocktail, @dose] do |f| %>
+  <%= f.input :description %>
+  <%= f.association :ingredient %>
+  <%= f.submit class: "btn btn-light" %>
+<% end %>
+
+
+<!-- link_to "Create a dose", new_cocktail_dose_path(@cocktail) -->
+<br>
+<%= link_to "Go back to Cocktails", cocktails_path %>
+
