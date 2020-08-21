@@ -1,21 +1,33 @@
-<%= @cocktail.name %>
-<% @cocktail.doses.each do |dose| %>
-<div class="dose"><%= dose.description %>
-<%= dose.ingredient.name %></div>
-<%= link_to "Remove", dose_path(dose), method: :delete %>
-<% end %>
+<div class="cocktail-container">
+  <div><h1 class="heading"><%= @cocktail.name %></h1></div>
+
+<div class="drink-image">
+  <%= cl_image_tag @cocktail.photo.key, height: 300, width: 400, crop: :fill, class: "drink-image" %>
+</div>
+
+<div>
+  <% @cocktail.doses.each do |dose| %>
+    <div class="dose"><%= dose.description %>
+    <%= dose.ingredient.name %>
+    <%= link_to "✂︎", dose_path(dose), method: :delete %></div>
+  <% end %>
+</div>
+
 <br>
 
-<h3>New Dose</h3>
+<h4>Write the directions for a new dose</h4>
 
-<%= simple_form_for [@cocktail, @dose] do |f| %>
+<div class="form">
+  <%= simple_form_for [@cocktail, @dose] do |f| %>
   <%= f.input :description %>
   <%= f.association :ingredient %>
   <%= f.submit class: "btn btn-light" %>
-<% end %>
+  <% end %>
+</div>
 
 
 <!-- link_to "Create a dose", new_cocktail_dose_path(@cocktail) -->
 <br>
-<%= link_to "Go back to Cocktails", cocktails_path %>
+<%= link_to "Go back to Cocktails", cocktails_path, class:"btn btn-light" %>
+</div>
 
