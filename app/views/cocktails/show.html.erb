@@ -1,9 +1,11 @@
 <div class="cocktail-container">
   <div><h1 class="heading"><%= @cocktail.name %></h1></div>
 
+<% if @cocktail.photo.attached?  %>
 <div class="drink-image">
-  <%= cl_image_tag @cocktail.photo.key if @cocktail.photo.attached?, height: 300, width: 400, crop: :fill, class: "drink-image" %>
+  <%= cl_image_tag @cocktail.photo.key, height: 300, width: 400, crop: :fill, class: "drink-image" %>
 </div>
+<% end %>
 
 <div>
   <% @cocktail.doses.each do |dose| %>
